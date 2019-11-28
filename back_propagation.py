@@ -1,6 +1,6 @@
 # Author Francois Mukaba
 # Course: Machine Learning
-# Date : 11/23/19
+# Date : 11/23/2019
 import numpy as np
 import pandas as pd
 from random import seed
@@ -52,13 +52,13 @@ def net(x_values: [], y_values: []) -> int:
     return (pd.Series(y_values) * pd.Series(x_values)).sum()
 
 
-# Returns a dictionary that contains outputs of the hidden and output layer
+# Returns a dictionary that contains input, hidden layer's output and final output
 def propagate_forward(inputs: [], network: {}) -> {}:
     layers_outputs = {}
 
     # add input bias
     inputs.insert(0, 1)
-
+    layers_outputs["input"] = inputs.copy()
     # propagate through hidden layer
     weights_hidden = network["hidden"]
     output_hidden = []
@@ -83,19 +83,19 @@ def propagate_forward(inputs: [], network: {}) -> {}:
     return layers_outputs
 
 
-# Returns a dictionary that contains errors of the hidden and output layer
-def propagate_backward(layers_output: {}, network: {}) -> {}:
+# Returns a dictionary that contains errors of the hidden and output layers
+def propagate_backward(layers_output: {}, network: {}, target: int) -> {}:
     errors = {}
     output_values = layers_output["output"]
 
     # get target label
-    label = 1
+    target_label = target
     target_rep = []
 
     for i in range(len(output_values)):
         target_rep.append(0.01)
     # switch real target value on
-    target_rep[label] = 0.99
+    target_rep[target_label] = 0.99
 
     # get errors from output layer
     errors_output = []
@@ -124,29 +124,23 @@ def propagate_backward(layers_output: {}, network: {}) -> {}:
 
 # Updates network's weights
 def update_weights(network: {}, errors: {}, layers_output: {}, learning_rate: float):
-
     # update weights from hidden to output layer
     weights_output = network["output"]
     errors_output = errors["output"]
-    output_values = layers_output["output"]
+    output_hidden = layers_output["hidden"]
+
+    # adding back the bias
+    output_hidden.insert(0, 1)
 
     for i in range(len(weights_output)):
         for j in range(len(weights_output[0])):
-            # weight of bias
-            if j == 0:
-                weights_output[i][j] = weights_output[i][j] + (learning_rate * errors_output[i] * 1)
-            else:
-                weights_output[i][j] = weights_output[i][j] + (learning_rate * errors_output[i] * output_values[i])
+            weights_output[i][j] = weights_output[i][j] + (learning_rate * errors_output[i] * output_hidden[j])
 
     # update weights from input to hidden layer
     weights_hidden = network["hidden"]
     errors_hidden = errors["hidden"]
-    output_hidden = layers_output["hidden"]
+    input_hidden = layers_output["input"]
 
     for i in range(len(weights_hidden)):
         for j in range(len(weights_hidden[0])):
-            # weight of bias
-            if j == 0:
-                weights_hidden[i][j] = weights_hidden[i][j] + (learning_rate * errors_hidden[i] * 1)
-            else:
-                weights_hidden[i][j] = weights_hidden[i][j] + (learning_rate * errors_hidden[i] * output_hidden[i])
+            weights_hidden[i][j] = weights_hidden[i][j] + (learning_rate * errors_hidden[i] * input_hidden[j])
