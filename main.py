@@ -50,7 +50,7 @@ for instance in range(TESTING_INSTANCES):
 # Print test results
 print("==== Results =====")
 print("Network properties: Input: {0}, Hidden: {1}, Output: {2}".format(INPUT_NUM, HIDDEN_NUM, OUTPUT_NUM))
-print("Learning rate: {0}, Epoch: {1}".format(LEARNING_RATE, EPOCH))
+print("Learning rate: {0}, Epoch: {1}, Training instances: {2}".format(LEARNING_RATE, EPOCH, TRAINING_INSTANCES))
 print("Correct classification = ", correct_classification)
 print("Incorrect classification = ", TESTING_INSTANCES - correct_classification)
 print("Accuracy = ", (correct_classification / TESTING_INSTANCES) * 100, "%")
