@@ -18,4 +18,10 @@ I made several mistakes and learned a lot as I was building this program. First,
 <img src= "./images/picture2.JPG" alt="accuracy2">
 
 
-Then I changed the epochs from 50 to 75 and increased the testing instances to 10,000 and I got the results shown in picture1.
+Then I changed the epochs from 50 to 75 and increased the testing instances to 10,000 and I got the results shown in the first picture.
+
+
+### What I learned:
+  
+    Artificial Neural networks
+    
