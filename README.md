@@ -21,7 +21,7 @@ I made several mistakes and learned a lot as I was building this program. First,
 Then I changed the epochs from 50 to 75 and increased the testing instances to 10,000 and I got the results shown above.
 
 
-### What I learned:
+### What I have learned:
   
     Artificial Neural networks
     Backpropagation
