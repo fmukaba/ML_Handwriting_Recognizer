@@ -1,4 +1,4 @@
-# Neural_Network
+# Handwriting_Recognizer
 
 Given an input that represents pixels in an image of a number between o to 9 inclusive, this neural network tries to predict what number the image holds using the backpropagation algorithm. The input fed to the network is a list of all the pixels making up the picture (784 numbers). The input gets sent to one hidden layer in the network, and from the hidden layer to return a list of ten output, where the index (0-1) of the maximum output is the number that the network thinks the image is holding.
 This is known as the MNIST dataset, and you can learn more about it <a href = "http://yann.lecun.com/exdb/mnist/">here</a>.
